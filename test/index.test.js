@@ -105,7 +105,7 @@ describe("Checking application main endpoints", () => {
     expect(included).toBe(true);
   });
 
-  it("should test that status code is correct for not found products", async () => {
+  it("should test that status code is correct for not found /products/:id", async () => {
     const params = "101010101010101010010100";
 
     const response = await request.get("/products/" + params);
@@ -116,5 +116,17 @@ describe("Checking application main endpoints", () => {
     } else {
       expect(response.status).toBe(200);
     }
+  });
+
+  it("should test that the delete endpoint is returning the correct status code", async () => {
+    const product = await ProductModel.create({
+      description: "Test for deletion",
+      price: 50,
+    });
+    const { _id } = product;
+
+    const response = await request.delete("/products/" + _id);
+
+    expect(response.status).toBe(204);
   });
 });

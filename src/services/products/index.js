@@ -16,6 +16,12 @@ productsRouter.get("/:id", async (req, res) => {
   res.status(200).send({ product });
 });
 
+productsRouter.delete("/:id", async (req, res) => {
+  const product = await ProductModel.findByIdAndDelete(req.params.id);
+  if (!product) return res.status(404).send({ message: "not found" });
+  res.status(204).send();
+});
+
 productsRouter.post("/", async (req, res) => {
   try {
     const { description, price } = req.body;
