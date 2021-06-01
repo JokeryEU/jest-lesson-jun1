@@ -58,7 +58,7 @@ describe("Checking application main endpoints", () => {
     const response = await request.get("/products");
     expect(response.status).toBe(200);
     expect(response.body.products).toBeDefined();
-    // expect(response.body.products.length).toBe(0);
+    expect(response.body.products.length).toBe(0);
   });
 
   const validData = {
